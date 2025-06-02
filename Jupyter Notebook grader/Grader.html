@@ -12,28 +12,28 @@
         // Firebase App (the core Firebase SDK) is always required and must be listed first
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
         // Add SDKs for Firebase products that you want to use
-        import { 
-            getAuth, 
-            onAuthStateChanged, 
-            signOut, 
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signOut,
             signInWithCustomToken,
-            createUserWithEmailAndPassword, 
-            signInWithEmailAndPassword,     
-            sendPasswordResetEmail,         
-            GoogleAuthProvider,             
-            signInWithPopup                 
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            sendPasswordResetEmail,
+            GoogleAuthProvider,
+            signInWithPopup
         } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc, addDoc, collection, query, where, onSnapshot, updateDoc, serverTimestamp, setLogLevel } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
         // Make Firebase functions globally available for the Babel script
         window.firebase = {
             initializeApp,
-            auth: { 
-                getAuth, 
-                onAuthStateChanged, 
-                signOut, 
+            auth: {
+                getAuth,
+                onAuthStateChanged,
+                signOut,
                 signInWithCustomToken,
-                createUserWithEmailAndPassword, 
+                createUserWithEmailAndPassword,
                 signInWithEmailAndPassword,
                 sendPasswordResetEmail,
                 GoogleAuthProvider,
@@ -67,28 +67,28 @@
         }
         /* Dark mode specific styles */
         @media (prefers-color-scheme: dark) {
-            body { background-color: #111827; /* gray-900 */ } 
-            .bg-gray-100 { background-color: #1f2937; /* gray-800 */ } 
+            body { background-color: #111827; /* gray-900 */ }
+            .bg-gray-100 { background-color: #1f2937; /* gray-800 */ }
             .text-gray-600 { color: #9ca3af; /* gray-400 */ }
-            .bg-white { background-color: #1f2937; color: #e5e7eb; } 
+            .bg-white { background-color: #1f2937; color: #e5e7eb; }
             .text-gray-800 { color: #f3f4f6; /* gray-100 */ }
             .text-gray-900 { color: #f9fafb; /* gray-50 */ }
             .border-gray-200 { border-color: #374151; /* gray-700 */ }
             .border-gray-300 { border-color: #4b5563; /* gray-600 */ }
-            .bg-red-100 { background-color: #450a0a; } 
+            .bg-red-100 { background-color: #450a0a; }
             .text-red-600 { color: #fca5a5; /* red-300 */ }
             .text-red-700 { color: #f87171; /* red-400 */ }
-            .bg-green-100 { background-color: #064e3b; } 
+            .bg-green-100 { background-color: #064e3b; }
             .text-green-600 { color: #6ee7b7; /* green-300 */ }
             .text-green-700 { color: #34d399; /* green-400 */ }
-            .bg-yellow-100 { background-color: #78350f; } 
+            .bg-yellow-100 { background-color: #78350f; }
             .text-yellow-600 { color: #fde047; /* yellow-300 */ }
             .text-yellow-700 { color: #facc15; /* yellow-400 */ }
-            .bg-blue-100 { background-color: #1e3a8a; } 
+            .bg-blue-100 { background-color: #1e3a8a; }
             .text-blue-700 { color: #60a5fa; /* blue-400 */ }
             .notebook-preview {
-                background-color: #1f2937; 
-                border-color: #374151; 
+                background-color: #1f2937;
+                border-color: #374151;
             }
             .bg-gray-50 { background-color: #374151; }
             .hover\:bg-gray-50:hover { background-color: #4b5563; }
