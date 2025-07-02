@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if form.instance.pk %}Edit Note{% else %}Create New Note{% endif %} - Sticky Notes
+{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-lg shadow-xl p-8 md:p-10 border border-purple-200">
+    <h2 class="text-3xl font-semibold text-gray-700 mb-8 text-center">
+        {% if form.instance.pk %}Edit Sticky Note{% else %}Create New Sticky Note{% endif %}
+    </h2>
+    <form method="post" class="space-y-6">
+        {% csrf_token %} {# Important for security in Django forms #}
+
+        <div class="mb-4">
+            <label for="{{ form.title.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+            {{ form.title }} {# Renders the title field from the form #}
+            {% if form.title.errors %}
+                <p class="text-red-500 text-xs italic">{{ form.title.errors }}</p>
+            {% endif %}
+        </div>
+
+        <div class="mb-6">
+            <label for="{{ form.content.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
+            {{ form.content }} {# Renders the content field from the form #}
+            {% if form.content.errors %}
+                <p class="text-red-500 text-xs italic">{{ form.content.errors }}</p>
+            {% endif %}
+        </div>
+
+        {% if form.non_field_errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="flex items-center justify-between">
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105">
+                {% if form.instance.pk %}Update Note{% else %}Create Note{% endif %}
+            </button>
+            <a href="{% url 'notes:note_list' %}" class="inline-block align-baseline font-bold text-sm text-gray-600 hover:text-gray-800 transition duration-300">
+                Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
