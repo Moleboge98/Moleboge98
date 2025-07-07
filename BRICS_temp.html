@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Organogram Grid</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the grid layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* gray-50 */
+        }
+        .organogram-grid {
+            padding: 2rem 1rem;
+            width: 100%;
+        }
+        .level-row {
+            margin-bottom: 3rem;
+        }
+        .level-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #111827; /* gray-900 */
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb; /* gray-200 */
+        }
+        .card-container {
+            display: flex;
+            overflow-x: auto; /* Enables horizontal scrolling */
+            padding-bottom: 1rem; /* Space for scrollbar */
+            gap: 1rem;
+            /* Custom scrollbar for better aesthetics */
+            scrollbar-width: thin;
+            scrollbar-color: #a5b4fc #e0e7ff;
+        }
+        .card-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .card-container::-webkit-scrollbar-track {
+            background: #e0e7ff; /* indigo-100 */
+            border-radius: 10px;
+        }
+        .card-container::-webkit-scrollbar-thumb {
+            background-color: #a5b4fc; /* indigo-300 */
+            border-radius: 10px;
+            border: 2px solid #e0e7ff; /* indigo-100 */
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb; /* gray-200 */
+            width: 280px;
+            flex-shrink: 0; /* Prevents cards from shrinking */
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .card .name {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #1f2937; /* gray-800 */
+        }
+        .card .institution {
+            font-weight: 500;
+            color: #4f46e5; /* indigo-600 */
+        }
+        .card .country {
+            margin-top: auto; /* Pushes country to the bottom */
+            padding-top: 0.75rem;
+            color: #6b7280; /* gray-500 */
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <div class="organogram-grid">
+        <!-- Row 1: Government Level -->
+        <div class="level-row">
+            <h2 class="level-title">Government Level</h2>
+            <div class="card-container">
+                <!-- Card 1 -->
+                <div class="card"><div class="name">Dr. Evelyn Reed</div><div class="institution">Department of State</div><div class="country"><span class="text-2xl">🇺🇸</span> USA</div></div>
+                <!-- Card 2 -->
+                <div class="card"><div class="name">Mr. Kenji Tanaka</div><div class="institution">Ministry of Foreign Affairs</div><div class="country"><span class="text-2xl">🇯🇵</span> Japan</div></div>
+                <!-- Card 3 -->
+                <div class="card"><div class="name">Ms. Anja Schmidt</div><div class="institution">Federal Foreign Office</div><div class="country"><span class="text-2xl">🇩🇪</span> Germany</div></div>
+                <!-- Card 4 -->
+                <div class="card"><div class="name">Dr. Priya Singh</div><div class="institution">Ministry of External Affairs</div><div class="country"><span class="text-2xl">🇮🇳</span> India</div></div>
+                <!-- Card 5 -->
+                <div class="card"><div class="name">Mr. Carlos Silva</div><div class="institution">Ministry of Science & Tech</div><div class="country"><span class="text-2xl">🇧🇷</span> Brazil</div></div>
+                <!-- Card 6 -->
+                <div class="card"><div class="name">Ms. Aisha Bello</div><div class="institution">Dept. of Int'l Relations</div><div class="country"><span class="text-2xl">🇳🇬</span> Nigeria</div></div>
+                <!-- Card 7 -->
+                <div class="card"><div class="name">Mr. Liam Murphy</div><div class="institution">Global Affairs Canada</div><div class="country"><span class="text-2xl">🇨🇦</span> Canada</div></div>
+                <!-- Card 8 -->
+                <div class="card"><div class="name">Dr. Sophie Dubois</div><div class="institution">Ministry for Europe</div><div class="country"><span class="text-2xl">🇫🇷</span> France</div></div>
+                <!-- Card 9 -->
+                <div class="card"><div class="name">Mr. Ben Carter</div><div class="institution">Foreign, Commonwealth Office</div><div class="country"><span class="text-2xl">🇬🇧</span> UK</div></div>
+                <!-- Card 10 -->
+                <div class="card"><div class="name">Ms. Olivia Wilson</div><div class="institution">Dept. of Foreign Affairs</div><div class="country"><span class="text-2xl">🇦🇺</span> Australia</div></div>
+                <!-- Card 11 -->
+                <div class="card"><div class="name">Mr. Thabo Mbeki</div><div class="institution">Dept. of Science & Innovation</div><div class="country"><span class="text-2xl">🇿🇦</span> South Africa</div></div>
+            </div>
+        </div>
+
+        <!-- Row 2: Co-Principal Investigators -->
+        <div class="level-row">
+            <h2 class="level-title">Co-Principal Investigators</h2>
+            <div class="card-container">
+                <!-- Card 1 -->
+                <div class="card"><div class="name">Prof. Robert Vance</div><div class="institution">Stanford University</div><div class="country"><span class="text-2xl">🇺🇸</span> USA</div></div>
+                <!-- Card 2 -->
+                <div class="card"><div class="name">Dr. Yui Hirasawa</div><div class="institution">University of Tokyo</div><div class="country"><span class="text-2xl">🇯🇵</span> Japan</div></div>
+                <!-- Card 3 -->
+                <div class="card"><div class="name">Prof. Klaus Richter</div><div class="institution">Max Planck Institute</div><div class="country"><span class="text-2xl">🇩🇪</span> Germany</div></div>
+                <!-- Card 4 -->
+                <div class="card"><div class="name">Dr. Aarav Patel</div><div class="institution">Indian Institute of Science</div><div class="country"><span class="text-2xl">🇮🇳</span> India</div></div>
+                <!-- Card 5 -->
+                <div class="card"><div class="name">Prof. Isabella Costa</div><div class="institution">University of São Paulo</div><div class="country"><span class="text-2xl">🇧🇷</span> Brazil</div></div>
+                <!-- Card 6 -->
+                <div class="card"><div class="name">Dr. Chiamaka Nwosu</div><div class="institution">University of Lagos</div><div class="country"><span class="text-2xl">🇳🇬</span> Nigeria</div></div>
+                <!-- Card 7 -->
+                <div class="card"><div class="name">Prof. Emily Tremblay</div><div class="institution">University of Toronto</div><div class="country"><span class="text-2xl">🇨🇦</span> Canada</div></div>
+                <!-- Card 8 -->
+                <div class="card"><div class="name">Dr. Luc Moreau</div><div class="institution">Sorbonne University</div><div class="country"><span class="text-2xl">🇫🇷</span> France</div></div>
+                <!-- Card 9 -->
+                <div class="card"><div class="name">Prof. Eleanor Hughes</div><div class="institution">University of Cambridge</div><div class="country"><span class="text-2xl">🇬🇧</span> UK</div></div>
+                <!-- Card 10 -->
+                <div class="card"><div class="name">Dr. Jack Fisher</div><div class="institution">Australian National University</div><div class="country"><span class="text-2xl">🇦🇺</span> Australia</div></div>
+                <!-- Card 11 -->
+                <div class="card"><div class="name">Prof. Naledi Pandor</div><div class="institution">University of Cape Town</div><div class="country"><span class="text-2xl">🇿🇦</span> South Africa</div></div>
+            </div>
+        </div>
+
+        <!-- Row 3: Focal Points -->
+        <div class="level-row">
+            <h2 class="level-title">Focal Points</h2>
+            <div class="card-container">
+                <!-- Card 1 -->
+                <div class="card"><div class="name">Sam Miller</div><div class="institution">Global Research Initiative</div><div class="country"><span class="text-2xl">🇺🇸</span> USA</div></div>
+                <!-- Card 2 -->
+                <div class="card"><div class="name">Akira Sato</div><div class="institution">Sakura Science Foundation</div><div class="country"><span class="text-2xl">🇯🇵</span> Japan</div></div>
+                <!-- Card 3 -->
+                <div class="card"><div class="name">Lena Weber</div><div class="institution">Berlin Innovation Hub</div><div class="country"><span class="text-2xl">🇩🇪</span> Germany</div></div>
+                <!-- Card 4 -->
+                <div class="card"><div class="name">Rohan Kumar</div><div class="institution">Tech Parks India</div><div class="country"><span class="text-2xl">🇮🇳</span> India</div></div>
+                <!-- Card 5 -->
+                <div class="card"><div class="name">Julia Lima</div><div class="institution">Amazonas Conservation</div><div class="country"><span class="text-2xl">🇧🇷</span> Brazil</div></div>
+                <!-- Card 6 -->
+                <div class="card"><div class="name">David Adeboye</div><div class="institution">Lagos Tech Connect</div><div class="country"><span class="text-2xl">🇳🇬</span> Nigeria</div></div>
+                <!-- Card 7 -->
+                <div class="card"><div class="name">Megan Chen</div><div class="institution">MaRS Discovery District</div><div class="country"><span class="text-2xl">🇨🇦</span> Canada</div></div>
+                <!-- Card 8 -->
+                <div class="card"><div class="name">Antoine Martin</div><div class="institution">Station F</div><div class="country"><span class="text-2xl">🇫🇷</span> France</div></div>
+                <!-- Card 9 -->
+                <div class="card"><div class="name">Harry Wilson</div><div class="institution">UK Research and Innovation</div><div class="country"><span class="text-2xl">🇬🇧</span> UK</div></div>
+                <!-- Card 10 -->
+                <div class="card"><div class="name">Grace Kelly</div><div class="institution">CSIRO</div><div class="country"><span class="text-2xl">🇦🇺</span> Australia</div></div>
+                <!-- Card 11 -->
+                <div class="card"><div class="name">Sipho Ndlovu</div><div class="institution">The Innovation Hub</div><div class="country"><span class="text-2xl">🇿🇦</span> South Africa</div></div>
+            </div>
+        </div>
+
+        <!-- Row 4: Co-ordination Team -->
+        <div class="level-row">
+            <h2 class="level-title">Co-ordination Team</h2>
+            <div class="card-container">
+                <!-- Card 1 -->
+                <div class="card"><div class="name">Dr. Alice Walker</div><div class="institution">Global Coordination Unit</div><div class="country"><span class="text-2xl">🇨🇭</span> Switzerland</div></div>
+                <!-- Card 2 -->
+                <div class="card"><div class="name">Mr. Omar Hassan</div><div class="institution">Project Management Office</div><div class="country"><span class="text-2xl">🇦🇪</span> UAE</div></div>
+                <!-- Card 3 -->
+                <div class="card"><div class="name">Ms. Sofia Novak</div><div class="institution">International Liaison Dept.</div><div class="country"><span class="text-2xl">🇸🇬</span> Singapore</div></div>
+                <!-- Card 4 -->
+                <div class="card"><div class="name">Mr. Leo Virtanen</div><div class="institution">Data & Analytics Hub</div><div class="country"><span class="text-2xl">🇫🇮</span> Finland</div></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
