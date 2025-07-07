@@ -1,0 +1,24 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}Order Confirmation{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-lg shadow-lg p-6 md:p-8 text-center">
+    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+        <!-- Heroicon name: outline/check -->
+        <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+    </div>
+    <h1 class="text-3xl font-bold text-gray-800 mt-4">Thank you for your order!</h1>
+    <p class="text-gray-600 mt-2">Your order #{{ order.id }} has been placed successfully.</p>
+    <p class="text-gray-600">A confirmation email with your invoice has been sent to {{ user.email }}.</p>
+    <div class="mt-6">
+        <a href="{% url 'shop:home' %}" class="px-6 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700">
+            Continue Shopping
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+

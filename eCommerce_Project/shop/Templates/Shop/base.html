@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-Commerce Platform{% endblock %}</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="{% url 'shop:home' %}" class="text-2xl font-bold text-gray-800">
+                        TakeALittle
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="{% url 'shop:home' %}" class="text-gray-600 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        {% if user.is_authenticated %}
+                            {% if user.is_vendor %}
+                                <a href="{% url 'shop:vendor_dashboard' %}" class="text-gray-600 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                            {% endif %}
+                             <a href="{% url 'shop:view_cart' %}" class="text-gray-600 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Cart</a>
+                            <a href="#" onclick="document.getElementById('logout-form').submit();" class="text-gray-600 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Logout</a>
+                            <form id="logout-form" action="{% url 'shop:logout' %}" method="post" class="hidden">{% csrf_token %}</form>
+                        {% else %}
+                            <a href="{% url 'shop:login' %}" class="text-gray-600 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">Login</a>
+                            <a href="{% url 'shop:register' %}" class="bg-indigo-600 text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+            {% block content %}
+            <!-- Page content will be injected here -->
+            {% endblock %}
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t mt-12">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>&copy; 2025 TakeALittle. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

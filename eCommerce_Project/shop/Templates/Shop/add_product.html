@@ -1,0 +1,23 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Add Product - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <div class="bg-white shadow-lg rounded-lg p-6">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Add a New Product</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="space-y-4">
+                {{ form.as_p }}
+            </div>
+            <div class="mt-6">
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline">
+                    Save Product
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

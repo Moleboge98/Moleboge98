@@ -1,0 +1,101 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-8 px-4">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            <!-- Product Image -->
+            <div>
+                {% if product.image %}
+                    <img class="w-full h-full object-cover" src="{{ product.image.url }}" alt="{{ product.name }}">
+                {% else %}
+                    <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <span class="text-gray-500 text-2xl">No Image Available</span>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Product Info -->
+            <div class="p-6 md:p-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900">{{ product.name }}</h1>
+                <p class="text-md text-gray-500 mt-2">Sold by <a href="#" class="text-indigo-600 hover:underline">{{ product.store.name }}</a></p>
+
+                <div class="mt-4">
+                    <span class="text-4xl font-extrabold text-gray-900">R{{ product.price }}</span>
+                </div>
+
+                <div class="mt-6">
+                    <h2 class="text-lg font-semibold text-gray-800">Description</h2>
+                    <p class="mt-2 text-gray-600">{{ product.description }}</p>
+                </div>
+
+                <div class="mt-6">
+                    {% if product.stock > 0 %}
+                        <p class="text-sm text-green-600">In Stock ({{ product.stock }} available)</p>
+                        <a href="{% url 'shop:add_to_cart' product.id %}" class="mt-6 block w-full bg-indigo-600 text-white py-3 px-6 rounded-md text-center font-semibold text-lg hover:bg-indigo-700 transition-colors">
+                            Add to Cart
+                        </a>
+                    {% else %}
+                        <p class="text-sm text-red-600">Out of Stock</p>
+                        <button class="mt-6 block w-full bg-gray-400 text-white py-3 px-6 rounded-md text-center font-semibold text-lg cursor-not-allowed">
+                            Out of Stock
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="mt-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Customer Reviews</h2>
+
+        <!-- Review Form -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h3 class="text-xl font-semibold mb-4">Leave a Review</h3>
+            <form action="{% url 'shop:add_review' product.id %}" method="post">
+                {% csrf_token %}
+                
+                <!-- FIX: Let Django render the form to apply styles from forms.py -->
+                <div class="space-y-4">
+                    {{ review_form.as_p }}
+                </div>
+                
+                <button type="submit" class="mt-4 px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md hover:bg-indigo-700">Submit Review</button>
+            </form>
+        </div>
+
+        <!-- Existing Reviews -->
+        <div class="space-y-6">
+            {% for review in reviews %}
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center justify-between">
+                    <p class="font-semibold text-gray-800">{{ review.user.username }}</p>
+                    <div class="flex items-center">
+                        <span class="text-yellow-500">
+                            <!-- Simple star rating -->
+                            {% for i in "12345" %}
+                                {% if i|add:0 <= review.rating %}★{% else %}☆{% endif %}
+                            {% endfor %}
+                        </span>
+                        {% if review.is_verified %}
+                            <span class="ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                Verified Purchase
+                            </span>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="text-gray-600 mt-2">{{ review.comment }}</p>
+                <p class="text-xs text-gray-400 mt-4">{{ review.created_at|date:"F d, Y" }}</p>
+            </div>
+            {% empty %}
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <p class="text-gray-500">No reviews yet. Be the first to write one!</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

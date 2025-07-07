@@ -1,0 +1,73 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+    {% if current_category %}{{ current_category.name }}{% else %}All Products{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+        <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 mb-4 md:mb-0">
+            {% if current_category %}{{ current_category.name }}{% else %}Featured Products{% endif %}
+        </h2>
+
+        <!-- Category Dropdown Filter -->
+        <form method="get" id="categoryFilterForm">
+            <!-- FIX: Added a more prominent border to the select dropdown -->
+            <select name="category" id="categorySelect" class="block w-full md:w-auto pl-3 pr-10 py-2 text-base border border-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                <option value="{% url 'shop:home' %}" {% if not current_category %}selected{% endif %}>All Categories</option>
+                {% for c in categories %}
+                    <option value="{{ c.get_absolute_url }}" {% if current_category.slug == c.slug %}selected{% endif %}>
+                        {{ c.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        {% for product in products %}
+        <div class="group relative flex flex-col bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <a href="{% url 'shop:product_detail' product.id %}">
+                <!-- FIX: Replaced aspect-ratio with a fixed height (h-64) to make tiles shorter -->
+                <div class="h-64 bg-gray-200 group-hover:opacity-75">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-center object-cover">
+                    {% else %}
+                    <div class="w-full h-full flex items-center justify-center text-gray-400">No Image</div>
+                    {% endif %}
+                </div>
+            </a>
+            <div class="p-4 flex flex-col flex-grow">
+                <h3 class="text-sm font-medium text-gray-900">
+                    <a href="{% url 'shop:product_detail' product.id %}">
+                        <span aria-hidden="true" class="absolute inset-0"></span>
+                        {{ product.name }}
+                    </a>
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">{{ product.store.name }}</p>
+                <div class="flex-grow"></div> <!-- Pushes price and button to the bottom -->
+                <div class="flex justify-between items-center mt-4">
+                    <p class="text-md font-bold text-gray-900">R{{ product.price }}</p>
+                    <a href="{% url 'shop:add_to_cart' product.id %}" class="relative z-10 px-3 py-1 bg-indigo-600 text-white text-xs font-semibold rounded-md hover:bg-indigo-700">
+                        Add to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="col-span-full text-gray-500">There are no products in this category.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    // This script makes the dropdown automatically navigate when an option is selected.
+    document.getElementById('categorySelect').addEventListener('change', function() {
+        if (this.value) {
+            window.location.href = this.value;
+        }
+    });
+</script>
+{% endblock %}
