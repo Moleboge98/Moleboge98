@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Team Organogram</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for connecting lines and layout */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* gray-50 */
+        }
+        .organogram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem; /* Adjusted padding for mobile */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        .level {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        /* Wrapper for Level 2 - now responsive */
+        .level-2-wrapper {
+            display: flex;
+            /* Stacks vertically on mobile */
+            flex-direction: column; 
+            /* Switches to horizontal on medium screens and up */
+            gap: 4rem; /* Vertical gap on mobile */
+        }
+        .manager-and-team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 4rem; /* Space for connecting line */
+            position: relative;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            text-align: center;
+            width: 240px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e5e7eb; /* gray-200 */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            object-fit: cover;
+            border: 3px solid #f3f4f6; /* gray-100 */
+        }
+        .card .name {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #111827; /* gray-900 */
+        }
+        .card .title {
+            color: #4f46e5; /* indigo-600 */
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+        .card .country {
+            margin-top: 0.75rem;
+            color: #6b7280; /* gray-500 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        /* --- Connecting Lines --- */
+        /* Line from Level 1 down to the Level 2 area */
+        .level-1::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -2rem;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2rem;
+            background-color: #d1d5db; /* gray-300 */
+        }
+
+        /* Vertical line from manager down to their team's horizontal connector */
+        .manager-and-team::after {
+            content: '';
+            position: absolute;
+            top: 130px; /* Position below the manager card */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2rem;
+            background-color: #d1d5db; /* gray-300 */
+        }
+
+        /* Horizontal line connecting the team members */
+        .team-members::before {
+            content: '';
+            position: absolute;
+            top: -2rem; /* Position above the team cards */
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background-color: #d1d5db; /* gray-300 */
+        }
+
+        /* Vertical line from team member up to their horizontal connector */
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 2rem;
+            background-color: #d1d5db; /* gray-300 */
+        }
+
+        /* Responsive styles for medium screens and up (768px) */
+        @media (min-width: 768px) {
+            .organogram {
+                padding: 2rem;
+            }
+            .level-2-wrapper {
+                flex-direction: row; /* Go back to horizontal layout */
+                gap: 2rem; /* Horizontal gap for desktop */
+            }
+
+            /* Horizontal line connecting all Level 2 managers (DESKTOP ONLY) */
+            .level-2-wrapper::before {
+                content: '';
+                position: absolute;
+                top: -2rem;
+                left: 15%; 
+                right: 15%;
+                height: 2px;
+                background-color: #d1d5db; /* gray-300 */
+            }
+            
+            /* Vertical line from horizontal connector down to each manager (DESKTOP ONLY) */
+            .manager-and-team::before {
+                content: '';
+                position: absolute;
+                top: -2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 2px;
+                height: 2rem;
+                background-color: #d1d5db; /* gray-300 */
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <div class="organogram">
+        <!-- Level 1: Top Leadership -->
+        <div class="level level-1 mb-16 relative">
+            <div class="card">
+                <img src="https://placehold.co/100x100/6366f1/ffffff?text=CEO" alt="Profile Picture">
+                <div class="name">Alex Johnson</div>
+                <div class="title">Chief Executive Officer</div>
+                <div class="country">
+                    <span class="text-2xl">�🇸</span> USA
+                </div>
+            </div>
+        </div>
+
+        <!-- Level 2: Managers/Leads -->
+        <div class="level level-2 relative">
+            <div class="level-2-wrapper">
+                <!-- Manager 1 -->
+                <div class="manager-and-team">
+                    <div class="card">
+                        <img src="https://placehold.co/100x100/ec4899/ffffff?text=Lead" alt="Profile Picture">
+                        <div class="name">Maria Garcia</div>
+                        <div class="title">Head of Engineering</div>
+                        <div class="country">
+                            <span class="text-2xl">🇧🇷</span> Brazil
+                        </div>
+                    </div>
+                    <!-- Level 3: Team Members for Manager 1 -->
+                    <div class="team-members">
+                        <div class="team-member relative">
+                            <div class="card">
+                                <img src="https://placehold.co/100x100/22c55e/ffffff?text=Dev" alt="Profile Picture">
+                                <div class="name">Saanvi Sharma</div>
+                                <div class="title">Frontend Developer</div>
+                                <div class="country"><span class="text-2xl">🇮🇳</span> India</div>
+                            </div>
+                        </div>
+                        <div class="team-member relative">
+                            <div class="card">
+                                <img src="https://placehold.co/100x100/22c55e/ffffff?text=Dev" alt="Profile Picture">
+                                <div class="name">Lukas Müller</div>
+                                <div class="title">Backend Developer</div>
+                                <div class="country"><span class="text-2xl">🇩🇪</span> Germany</div>
+                            </div>
+                        </div>
+                        <div class="team-member relative">
+                            <div class="card">
+                                <img src="https://placehold.co/100x100/22c55e/ffffff?text=Dev" alt="Profile Picture">
+                                <div class="name">Kenji Tanaka</div>
+                                <div class="title">DevOps Engineer</div>
+                                <div class="country"><span class="text-2xl">🇯🇵</span> Japan</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manager 2 -->
+                <div class="manager-and-team">
+                    <div class="card">
+                        <img src="https://placehold.co/100x100/f97316/ffffff?text=Lead" alt="Profile Picture">
+                        <div class="name">David Chen</div>
+                        <div class="title">Head of Product</div>
+                        <div class="country">
+                            <span class="text-2xl">🇨🇳</span> China
+                        </div>
+                    </div>
+                    <!-- Level 3: Team Members for Manager 2 -->
+                    <div class="team-members">
+                        <div class="team-member relative">
+                            <div class="card">
+                                <img src="https://placehold.co/100x100/3b82f6/ffffff?text=PM" alt="Profile Picture">
+                                <div class="name">Olivia Smith</div>
+                                <div class="title">Product Manager</div>
+                                <div class="country"><span class="text-2xl">🇬🇧</span> UK</div>
+                            </div>
+                        </div>
+                        <div class="team-member relative">
+                            <div class="card">
+                                <img src="https://placehold.co/100x100/3b82f6/ffffff?text=UX" alt="Profile Picture">
+                                <div class="name">Chloe Dubois</div>
+                                <div class="title">UX/UI Designer</div>
+                                <div class="country"><span class="text-2xl">🇫🇷</span> France</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Manager 3 -->
+                <div class="manager-and-team">
+                    <div class="card">
+                        <img src="https://placehold.co/100x100/8b5cf6/ffffff?text=Lead" alt="Profile Picture">
+                        <div class="name">Fatima Al-Fassi</div>
+                        <div class="title">Head of Marketing</div>
+                        <div class="country">
+                            <span class="text-2xl">🇿🇦</span> South Africa
+                        </div>
+                    </div>
+                    <!-- Level 3: Team Members for Manager 3 -->
+                    <div class="team-members">
+                        <div class="team-member relative">
+                            <div class="card">
+                                <img src="https://placehold.co/100x100/14b8a6/ffffff?text=Mkt" alt="Profile Picture">
+                                <div class="name">Liam O'Connell</div>
+                                <div class="title">Content Strategist</div>
+                                <div class="country"><span class="text-2xl">🇨🇦</span> Canada</div>
+                            </div>
+                        </div>
+                        <div class="team-member relative">
+                            <div class="card">
+                                <img src="https://placehold.co/100x100/14b8a6/ffffff?text=Mkt" alt="Profile Picture">
+                                <div class="name">Isabella Rossi</div>
+                                <div class="title">SEO Specialist</div>
+                                <div class="country"><span class="text-2xl">🇦🇺</span> Australia</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+�
